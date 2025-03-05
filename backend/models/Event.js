@@ -9,7 +9,6 @@ const eventSchema = new mongoose.Schema({
     type: String, // Store as YYYY-MM-DD string
     required: true,
   },
-  description: String,
 });
 
 export default mongoose.model('Event', eventSchema);

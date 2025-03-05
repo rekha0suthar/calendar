@@ -2,7 +2,7 @@ import Event from '../models/Event.js';
 
 // Add event
 const addEvent = async (req, res) => {
-  const { date, title, description } = req.body;
+  const { date, title } = req.body;
 
   if (!date || !title) {
     return res.status(400).json({ msg: 'Date and title are required' });
@@ -13,7 +13,6 @@ const addEvent = async (req, res) => {
     const event = new Event({
       date,
       title,
-      description,
     });
     await event.save();
 
@@ -21,7 +20,6 @@ const addEvent = async (req, res) => {
       id: event._id,
       title: event.title,
       date: event.date,
-      description: event.description,
     });
   } catch (err) {
     console.error(err);
@@ -51,7 +49,6 @@ const getEvents = async (req, res) => {
       id: event._id,
       title: event.title,
       date: event.date,
-      description: event.description,
     }));
 
     res.status(200).json(formattedEvents);
