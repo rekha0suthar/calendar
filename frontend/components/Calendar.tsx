@@ -45,6 +45,8 @@ const getLocalDateString = (date: Date): string => {
   return `${year}-${month}-${day}`;
 };
 
+const BASE_API_URL = 'https://calendar-backend-pi-nine.vercel.app/api';
+
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState<Record<string, Event[]>>({});
@@ -69,7 +71,7 @@ const Calendar: React.FC = () => {
         const formattedEnd = getLocalDateString(endDate);
 
         const response = await fetch(
-          `http://localhost:5500/api/events?start=${formattedStart}&end=${formattedEnd}`
+          `${BASE_API_URL}/events?start=${formattedStart}&end=${formattedEnd}`
         );
 
         if (!response.ok) {
@@ -117,7 +119,7 @@ const Calendar: React.FC = () => {
     try {
       const formattedDate = getLocalDateString(selectedDate);
 
-      const response = await fetch('http://localhost:5500/api/events', {
+      const response = await fetch(`${BASE_API_URL}/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
